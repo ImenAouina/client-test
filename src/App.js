@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom'
+import LoginForm from './components/LoginForm';
+import Dashboard from './components/Dashboard';
+import AddProject from './components/AddProject';
 
 function App() {
+const [authorized , setAuthorized] = useState('')
+const [projects, setProjects] = useState([])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1 style={{textAlign:"center", marginTop:"20px"}}>Project Manager</h1>
+    <Routes>
+
+      <Route path='/' element={<Dashboard projects={projects} setProjects={setProjects}/>}/> 
+      <Route path='/sing_in' element={<LoginForm authorized={authorized} setAuthorized={setAuthorized}/>}/> 
+      <Route path='/projects/new' element={<AddProject projects={projects} setProjects={setProjects}/>} />
+    
+    </Routes>
+      
     </div>
   );
 }
